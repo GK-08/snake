@@ -11,6 +11,8 @@ const snake=[wormHead];
 
 let dir=right;
 
+let score=0;
+
 function moveFood(){
     if(wormHead.offsetLeft===food.offsetLeft && wormHead.offsetTop===food.offsetTop){
         let X=Math.floor(Math.random()*480);
@@ -23,6 +25,8 @@ function moveFood(){
         nextCell.classList.add(`worm-cell`);
         board.appendChild(nextCell);
         snake.push(nextCell);
+        score+=10;
+        document.getElementById(`score-container`).innerHTML=`Score: ${score}`;
     }
     for(let i=snake.length-1; i>0; i--){
         snake[i].style.left=`${snake[i-1].offsetLeft}px`;

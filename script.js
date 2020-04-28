@@ -49,12 +49,24 @@ function move(direction){
             alert(`Sorry, you lost`);
             clearInterval(moving);
         }
+        for(let i=1; i<snake.length; i++){
+            if(snake[i].offsetLeft===wormHead.offsetLeft && snake[i].offsetTop==wormHead.offsetTop){
+                alert(`Sorry, you lost`);
+                clearInterval(moving);
+            }
+        }
     }
     if (direction===up){
         wormHead.style.top=`${Yposition-10}px`;
         if(wormHead.offsetTop<0){
             alert(`Sorry, you lost`);
             clearInterval(moving);
+        }
+        for(let i=1; i<snake.length; i++){
+            if(snake[i].offsetLeft===wormHead.offsetLeft && snake[i].offsetTop==wormHead.offsetTop){
+                alert(`Sorry, you lost`);
+                clearInterval(moving);
+            }
         }
     }
     if (direction===right){
@@ -63,12 +75,24 @@ function move(direction){
             alert(`Sorry, you lost`);
             clearInterval(moving);
         }
+        for(let i=1; i<snake.length; i++){
+            if(snake[i].offsetLeft===wormHead.offsetLeft && snake[i].offsetTop==wormHead.offsetTop){
+                alert(`Sorry, you lost`);
+                clearInterval(moving);
+            }
+        }
     }
     if (direction===down){
         wormHead.style.top=`${Yposition+10}px`;
         if(wormHead.offsetTop>630){
             alert(`Sorry, you lost`);
             clearInterval(moving);
+        }
+        for(let i=1; i<snake.length; i++){
+            if(snake[i].offsetLeft===wormHead.offsetLeft && snake[i].offsetTop==wormHead.offsetTop){
+                alert(`Sorry, you lost`);
+                clearInterval(moving);
+            }
         }
     }
 }

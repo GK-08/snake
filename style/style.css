@@ -38,3 +38,11 @@
     margin-top: 10px;
     text-align: center;
 }
+
+#button-bar{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    position: absolute;
+    right: -49.8px;
+}

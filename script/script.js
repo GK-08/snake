@@ -1,18 +1,32 @@
 import { Snake } from "./snakeClass.js";
 // import { RIGHT } from "./config.js";
 
-const LEFT=37;
-const UP=38;
-const RIGHT=39;
-const DOWN=40;
-const BOARD_WIDTH=board.offsetWidth;
-const BOARD_HEIGHT=board.offsetHeight;
-const SCORE_CONTAINER=document.getElementById(`score-container`);
-
+const startBtn=document.getElementById('start-button');
+const pauseBtn=document.getElementById('pause-button');
+const stopBtn=document.getElementById('stop-button');
 
 const snake = new Snake();
 snake.createFood();
-snake.move();
+
+function startFunction(){
+    snake.move();
+
+    snake.moving=setInterval(function(){
+        if(snake.checkIfAteFood()){
+            snake.makeBigger();
+            snake.createFood();
+            snake.updateScore();
+        }
+        if(snake.checkIfDied()){
+            snake.died();
+            return;
+        }
+        snake.move();
+    },100);
+}
+
+
+startBtn.addEventListener('click',startFunction,{once:true})
 
 document.onkeydown=function(e){
     if(Math.abs(snake.direction-e.keyCode)!==2)
@@ -20,19 +34,13 @@ document.onkeydown=function(e){
             snake.direction=e.keyCode;
 }
 
-let moving=setInterval(function(){
-    if(snake.checkIfAteFood()){
-        snake.makeBigger();
-        snake.createFood();
-        snake.updateScore();
-    }
-    if(snake.checkIfDied()){
-        console.log(`You Died`);
-        clearInterval(moving);
-        return;
-    }
-    snake.move();
-},100);
+pauseBtn.addEventListener('click', ()=>{
+    clearInterval(snake.moving);
+    startBtn.addEventListener('click',startFunction,{once:true})
+})
 
-
-
+stopBtn.addEventListener('click',()=>{
+    clearInterval(snake.moving);
+    snake.reset();
+    startBtn.addEventListener('click',startFunction,{once:true})
+})

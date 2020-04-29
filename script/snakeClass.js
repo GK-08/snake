@@ -6,6 +6,7 @@ const DOWN=40;
 const BOARD_WIDTH=board.offsetWidth;
 const BOARD_HEIGHT=board.offsetHeight;
 const SCORE_CONTAINER=document.getElementById(`score-container`);
+const BOARD=document.getElementById('board'); //is it really needed?
 
 
 class Snake{
@@ -17,6 +18,17 @@ class Snake{
         this.direction=RIGHT;
         this.score=0;
         this.food=document.getElementById(`food`);
+        this.moving;
+    }
+    reset(){
+        const cells=document.getElementsByClassName(`snake-cell`);
+        for (let i=0; i<cells.length; i++){
+            cells[i].parentNode.removeChild(cells[i]);
+        }
+        this.snake=[this.snakeHead];
+        this.score=0;
+        this.snakeHead.style.top='0px';
+        this.snakeHead.style.left='0px';
     }
     checkIfDied(){
         const X=this.snakeHead.offsetLeft;
@@ -34,19 +46,18 @@ class Snake{
             case DOWN:
                 if(Y===BOARD_HEIGHT-10)
                 return true;
-            default:
-                return false;
         }
-        console.log('head:' + this.snakeHead.offsetLeft+'  '+this.snakeHead.offsetTop);
         for(let i=this.snake.length-1; i>0; i--){
-            console.log(this.snake[i].offsetLeft+'  '+this.snake[i].offsetTop);
             if(this.snakeHead.offsetLeft===this.snake[i].offsetLeft && 
                 this.snakeHead.offsetTop===this.snake[i].offsetTop){
-                    alert('kamikaze')
                     return true;
                 }
         }
         return false;
+    }
+    died(){
+        clearInterval(this.moving);
+        console.log('you died');
     }
     move(){
         for(let i=this.snake.length-1; i>0; i--){

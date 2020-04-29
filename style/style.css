@@ -11,10 +11,10 @@
     height: 640px;
     align-self: center;
     background-color: beige;
-    box-shadow: 0 0 0 8px blue;
+    /* box-shadow: 0 0 0 8px blue; */
 }
 
-.worm-cell{
+.snake-cell{
     top: 0px;
     left: 0px;
     position: absolute;

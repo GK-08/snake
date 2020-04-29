@@ -17,7 +17,6 @@ snake.move(direction);
 
 let moving=setInterval(function(){
     if(snake.checkIfAteFood()){
-        alert('eat');
         snake.makeBigger();
         snake.createFood();
         snake.updateScore();

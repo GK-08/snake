@@ -1,4 +1,12 @@
-import * as config from "./config.js";
+// import * as config from "./config.js";
+const LEFT=37;
+const UP=38;
+const RIGHT=39;
+const DOWN=40;
+const BOARD_WIDTH=board.offsetWidth;
+const BOARD_HEIGHT=board.offsetHeight;
+const SCORE_CONTAINER=document.getElementById(`score-container`);
+
 
 class Snake{
     constructor(){
@@ -6,16 +14,29 @@ class Snake{
         this.snakeHead.classList.add(`snake-cell`);
         board.appendChild(this.snakeHead);
         this.snake=[this.snakeHead];
-        this.direction=config.RIGHT;
+        this.direction=RIGHT;
         this.score=0;
         this.food=document.getElementById(`food`);
     }
     checkIfDied(){
-        if(this.snakeHead.offsetLeft<0||this.snakeHead.offsetLeft>config.BOARD_WIDTH-10
-            ||this.snakeHead.offsetTop<0||this.snakeHead.offsetTop>config.BOARD_HEIGHT-10){
-                alert(this.snakeHead.offsetLeft+'   '+this.snakeHead.offsetTop);
+        const X=this.snakeHead.offsetLeft;
+        const Y=this.snakeHead.offsetTop;
+        switch(this.direction){
+            case LEFT:
+                if(X===0)
                 return true;
-            }
+            case UP:
+                if(Y===0)
+                return true;
+            case RIGHT:
+                if(X===BOARD_WIDTH-10)
+                return true;
+            case DOWN:
+                if(Y===BOARD_HEIGHT-10)
+                return true;
+            default:
+                return false;
+        }
         console.log('head:' + this.snakeHead.offsetLeft+'  '+this.snakeHead.offsetTop);
         for(let i=this.snake.length-1; i>0; i--){
             console.log(this.snake[i].offsetLeft+'  '+this.snake[i].offsetTop);
@@ -27,22 +48,22 @@ class Snake{
         }
         return false;
     }
-    move(direction){
+    move(){
         for(let i=this.snake.length-1; i>0; i--){
             this.snake[i].style.left=`${this.snake[i-1].offsetLeft}px`;
             this.snake[i].style.top=`${this.snake[i-1].offsetTop}px`;
         }
-        switch(direction){
-            case config.LEFT:
+        switch(this.direction){
+            case LEFT:
                 this.snakeHead.style.left=`${this.snakeHead.offsetLeft-10}px`;
                 break;
-            case config.UP:
+            case UP:
                 this.snakeHead.style.top=`${this.snakeHead.offsetTop-10}px`;
                 break;
-            case config.RIGHT:
+            case RIGHT:
                 this.snakeHead.style.left=`${this.snakeHead.offsetLeft+10}px`;
                 break;
-            case config.DOWN:
+            case DOWN:
                 this.snakeHead.style.top=`${this.snakeHead.offsetTop+10}px`;
                 break;
             default:
@@ -51,7 +72,7 @@ class Snake{
     }
     updateScore(){
         this.score+=10;
-        config.SCORE_CONTAINER.innerHTML=`Score: ${this.score}`;
+        SCORE_CONTAINER.innerHTML=`Score: ${this.score}`;
     }
     makeBigger(){
         const nextCell=document.createElement(`div`);

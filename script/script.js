@@ -1,6 +1,8 @@
 import { Snake } from "./snakeClass.js";
 import { RIGHT } from "./config.js";
 
+
+//add as class funqction with setter
 let direction=RIGHT;
 
 document.onkeydown=function(e){

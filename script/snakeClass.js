@@ -16,9 +16,11 @@ class Snake{
                 alert(this.snakeHead.offsetLeft+'   '+this.snakeHead.offsetTop);
                 return true;
             }
+        console.log('head:' + this.snakeHead.offsetLeft+'  '+this.snakeHead.offsetTop);
         for(let i=this.snake.length-1; i>0; i--){
+            console.log(this.snake[i].offsetLeft+'  '+this.snake[i].offsetTop);
             if(this.snakeHead.offsetLeft===this.snake[i].offsetLeft && 
-                this.snakeHead.offsetTop===this.snake[i].offset){
+                this.snakeHead.offsetTop===this.snake[i].offsetTop){
                     alert('kamikaze')
                     return true;
                 }

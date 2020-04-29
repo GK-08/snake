@@ -21,14 +21,15 @@ class Snake{
         this.moving;
     }
     reset(){
-        const cells=document.getElementsByClassName(`snake-cell`);
-        for (let i=0; i<cells.length; i++){
-            cells[i].parentNode.removeChild(cells[i]);
+        for(let i=this.snake.length-1; i>0; i--){
+            this.snake[i].parentNode.removeChild(this.snake[i]);
         }
         this.snake=[this.snakeHead];
         this.score=0;
+        SCORE_CONTAINER.innerHTML=`Score: ${this.score}`;
         this.snakeHead.style.top='0px';
         this.snakeHead.style.left='0px';
+        this.direction=RIGHT;
     }
     checkIfDied(){
         const X=this.snakeHead.offsetLeft;

@@ -12,10 +12,19 @@ localStorage.setItem('highScore',0);
 
 class Snake{
     constructor(){
-        this.snakeHead=document.createElement(`div`);
+        this.snakeHead=document.createElement(`div`);//shall I write these with backtics?
         this.snakeHead.classList.add(`snake-cell`);
         board.appendChild(this.snakeHead);
+        this.snakeHead.style.top=`0px`;
+        this.snakeHead.style.left=`40px`;
         this.snake=[this.snakeHead];
+        for(let i=1; i<5; i++){
+            const cell=document.createElement(`div`);
+            cell.style.left=`${this.snakeHead.offsetLeft-(10*i)}px`;
+            cell.classList.add(`snake-cell`);
+            board.appendChild(cell);
+            this.snake.push(cell);
+        }
         this.direction=RIGHT;
         this.score=0;
         this.food=document.getElementById(`food`);

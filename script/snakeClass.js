@@ -5,9 +5,9 @@ const RIGHT=39;
 const DOWN=40;
 const BOARD_WIDTH=board.offsetWidth;
 const BOARD_HEIGHT=board.offsetHeight;
-const SCORE_CONTAINER=document.getElementById(`score-container`);
+const CURRENT_SCORE=document.getElementById(`current-score`);
+const BEST_SCORE=document.getElementById(`best-score`);
 const BOARD=document.getElementById('board'); //is it really needed?
-localStorage.setItem('highScore',0);
 
 
 class Snake{
@@ -43,10 +43,12 @@ class Snake{
                 this.snake[i].style.left=`${this.snakeHead.offsetLeft-(10*i)}px`;
             }
         }
-        if(this.score>localStorage.getItem('highScore'))
+        if(this.score>localStorage.getItem('highScore')){
             localStorage.setItem('highScore',this.score);
+            BEST_SCORE.innerHTML=`Best: ${this.score}`;
+        }
         this.score=0;
-        SCORE_CONTAINER.innerHTML=`Score: ${this.score}`;
+        CURRENT_SCORE.innerHTML=`Score: ${this.score}`;
         this.direction=RIGHT;
     }
     checkIfDied(){
@@ -111,7 +113,7 @@ class Snake{
     }
     updateScore(){
         this.score+=10;
-        SCORE_CONTAINER.innerHTML=`Score: ${this.score}`;
+        CURRENT_SCORE.innerHTML=`Score: ${this.score}`;
     }
     makeBigger(){
         const nextCell=document.createElement(`div`);

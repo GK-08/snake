@@ -5,6 +5,11 @@ const startBtn=document.getElementById('start-button');
 const pauseBtn=document.getElementById('pause-button');
 const stopBtn=document.getElementById('stop-button');
 
+if(localStorage.getItem('highScore')===null)
+    document.getElementById(`best-score`).innerHTML=`Best: ${localStorage.getItem('highScore')}`;
+else
+    document.getElementById(`best-score`).innerHTML=`Best: 0`;
+    
 const snake = new Snake();
 snake.createFood();
 

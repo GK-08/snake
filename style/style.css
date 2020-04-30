@@ -29,11 +29,18 @@
 }
 
 #score-container{
+    width: 480px;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.score{
     color: red;
     font-size: 24px;
     font-family: Arial, Helvetica, sans-serif;
-    margin: auto;
-    margin-top: 10px;
     text-align: center;
 }
 

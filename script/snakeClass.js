@@ -29,6 +29,7 @@ class Snake{
         this.score=0;
         this.food=document.getElementById(`food`);
         this.moving;
+        this.state=`still`;
     }
     reset(){
         this.snakeHead.style.top='0px';

@@ -6,8 +6,7 @@ const DOWN=40;
 const BOARD_WIDTH=board.offsetWidth;
 const BOARD_HEIGHT=board.offsetHeight;
 const CURRENT_SCORE=document.getElementById(`current-score`);
-const BEST_SCORE=document.getElementById(`best-score`);
-const BOARD=document.getElementById('board'); //is it really needed?
+const BEST_SCORE=document.getElementById(`best-score`);//is it really needed?
 
 
 class Snake{

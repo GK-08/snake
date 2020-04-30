@@ -31,16 +31,22 @@ class Snake{
         this.moving;
     }
     reset(){
+        this.snakeHead.style.top='0px';
+        this.snakeHead.style.left='40px';
         for(let i=this.snake.length-1; i>0; i--){
-            this.snake[i].parentNode.removeChild(this.snake[i]);
+            if(i>4){
+                this.snake[i].parentNode.removeChild(this.snake[i]);
+                this.snake.pop();
+            }
+            else{
+                this.snake[i].style.top=`0px`;
+                this.snake[i].style.left=`${this.snakeHead.offsetLeft-(10*i)}px`;
+            }
         }
-        this.snake=[this.snakeHead];
         if(this.score>localStorage.getItem('highScore'))
             localStorage.setItem('highScore',this.score);
         this.score=0;
         SCORE_CONTAINER.innerHTML=`Score: ${this.score}`;
-        this.snakeHead.style.top='0px';
-        this.snakeHead.style.left='0px';
         this.direction=RIGHT;
     }
     checkIfDied(){

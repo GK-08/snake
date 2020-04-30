@@ -10,7 +10,6 @@ snake.createFood();
 
 function startFunction(){
     snake.move();
-
     snake.moving=setInterval(function(){
         if(snake.checkIfAteFood()){
             snake.makeBigger();

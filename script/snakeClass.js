@@ -7,6 +7,7 @@ const BOARD_WIDTH=board.offsetWidth;
 const BOARD_HEIGHT=board.offsetHeight;
 const SCORE_CONTAINER=document.getElementById(`score-container`);
 const BOARD=document.getElementById('board'); //is it really needed?
+localStorage.setItem('highScore',0);
 
 
 class Snake{
@@ -25,6 +26,8 @@ class Snake{
             this.snake[i].parentNode.removeChild(this.snake[i]);
         }
         this.snake=[this.snakeHead];
+        if(this.score>localStorage.getItem('highScore'))
+            localStorage.setItem('highScore',this.score);
         this.score=0;
         SCORE_CONTAINER.innerHTML=`Score: ${this.score}`;
         this.snakeHead.style.top='0px';

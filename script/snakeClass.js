@@ -39,17 +39,25 @@ class Snake{
         const Y=this.snakeHead.offsetTop;
         switch(this.direction){
             case LEFT:
-                if(X===0)
-                return true;
+                if(X===0){
+                    return true;
+                }
+                break;
             case UP:
-                if(Y===0)
-                return true;
+                if(Y===0){
+                    return true;
+                }
+                break;
             case RIGHT:
-                if(X===BOARD_WIDTH-10)
-                return true;
+                if(X===BOARD_WIDTH-10){
+                    return true;
+                }
+                break;
             case DOWN:
-                if(Y===BOARD_HEIGHT-10)
-                return true;
+                if(Y===BOARD_HEIGHT-10){
+                    return true;
+                }
+                break;
         }
         for(let i=this.snake.length-1; i>0; i--){
             if(this.snakeHead.offsetLeft===this.snake[i].offsetLeft && 

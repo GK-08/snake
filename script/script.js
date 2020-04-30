@@ -9,7 +9,7 @@ if(localStorage.getItem('highScore')===null)
     document.getElementById(`best-score`).innerHTML=`Best: ${localStorage.getItem('highScore')}`;
 else
     document.getElementById(`best-score`).innerHTML=`Best: 0`;
-    
+
 const snake = new Snake();
 snake.createFood();
 
@@ -23,6 +23,7 @@ function startFunction(){
         }
         if(snake.checkIfDied()){
             snake.died();
+            snake.reset();
             return;
         }
         snake.move();

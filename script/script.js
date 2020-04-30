@@ -29,7 +29,7 @@ function startFunction(){
 startBtn.addEventListener('click',startFunction,{once:true})
 
 document.onkeydown=function(e){
-    if(Math.abs(snake.direction-e.keyCode)!==2)
+    if(Math.abs(snake.lastDirection-e.keyCode)!==2)
         if(e.keyCode>36 && e.keyCode<41)
             snake.direction=e.keyCode;
 }

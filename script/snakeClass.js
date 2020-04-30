@@ -100,7 +100,8 @@ class Snake{
                 break;
             default:
                 alert('DIRECTION ERROR');
-        } 
+        }
+        this.lastDirection=this.direction;
     }
     updateScore(){
         this.score+=10;

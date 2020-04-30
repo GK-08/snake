@@ -1,4 +1,3 @@
-// import * as config from "./config.js";
 const LEFT=37;
 const UP=38;
 const RIGHT=39;
@@ -14,8 +13,8 @@ class Snake{
         this.snakeHead=document.createElement(`div`);//shall I write these with backtics?
         this.snakeHead.classList.add(`snake-cell`);
         board.appendChild(this.snakeHead);
-        this.snakeHead.style.top=`0px`;
-        this.snakeHead.style.left=`40px`;
+        this.initialize();
+
         this.snake=[this.snakeHead];
         for(let i=1; i<5; i++){
             const cell=document.createElement(`div`);
@@ -24,15 +23,24 @@ class Snake{
             board.appendChild(cell);
             this.snake.push(cell);
         }
-        this.direction=RIGHT;
-        this.score=0;
         this.food=document.getElementById(`food`);
         this.moving;
-        this.state=`still`;
+    }
+    initialize(){
+        this.snakeHead.style.top=`0px`;
+        this.snakeHead.style.left=`40px`;
+        this.direction=RIGHT;
+        this.score=0;
+        this.isMoving=false;
+        CURRENT_SCORE.innerHTML=`Score: ${this.score}`;
     }
     reset(){
-        this.snakeHead.style.top='0px';
-        this.snakeHead.style.left='40px';
+        clearInterval(this.moving);
+        if(this.score>localStorage.getItem('highScore')){
+            localStorage.setItem('highScore',this.score);
+            BEST_SCORE.innerHTML=`Best: ${this.score}`;
+        }
+        this.initialize();
         for(let i=this.snake.length-1; i>0; i--){
             if(i>4){
                 this.snake[i].parentNode.removeChild(this.snake[i]);
@@ -43,13 +51,7 @@ class Snake{
                 this.snake[i].style.left=`${this.snakeHead.offsetLeft-(10*i)}px`;
             }
         }
-        if(this.score>localStorage.getItem('highScore')){
-            localStorage.setItem('highScore',this.score);
-            BEST_SCORE.innerHTML=`Best: ${this.score}`;
-        }
-        this.score=0;
-        CURRENT_SCORE.innerHTML=`Score: ${this.score}`;
-        this.direction=RIGHT;
+
     }
     checkIfDied(){
         const X=this.snakeHead.offsetLeft;
@@ -83,10 +85,6 @@ class Snake{
                 }
         }
         return false;
-    }
-    died(){
-        clearInterval(this.moving);
-        console.log('you died');
     }
     move(){
         for(let i=this.snake.length-1; i>0; i--){
@@ -129,8 +127,8 @@ class Snake{
         return false;
     }
     createFood(){
-        let X=Math.floor(Math.random()*480);
-        let Y=Math.floor(Math.random()*640);
+        let X=Math.floor(Math.random()*BOARD_WIDTH);
+        let Y=Math.floor(Math.random()*BOARD_HEIGHT);
         X-=(X%10);
         Y-=(Y%10);
         food.style.left=`${X}px`;

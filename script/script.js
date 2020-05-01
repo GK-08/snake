@@ -1,4 +1,4 @@
-import { Snake } from "./snakeClass.js";
+import { Snake } from "./snake.js";
 
 /*
 * These variables point DOM elements

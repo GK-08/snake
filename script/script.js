@@ -4,23 +4,23 @@ import { Snake } from "./snake.js";
 * These variables point DOM elements
 */
 
-const startBtn=document.getElementById(`start-button`);
-const pauseBtn=document.getElementById(`pause-button`);
-const stopBtn=document.getElementById(`stop-button`);
-const bestScore=document.getElementById(`best-score`);
+const startBtn = document.getElementById(`start-button`);
+const pauseBtn = document.getElementById(`pause-button`);
+const stopBtn = document.getElementById(`stop-button`);
+const bestScore = document.getElementById(`best-score`);
 
 /*
 * Adds best score (if it exists) in best-score div
 */
-if(localStorage.getItem('bestScore')!==null){
-    bestScore.innerHTML=`Best: ${localStorage.getItem('bestScore')}`;
+if(localStorage.getItem('bestScore') !== null){
+    bestScore.innerHTML = `Best: ${localStorage.getItem('bestScore')}`;
 }
 
 /*
 * Declare Snake object and create food
 * movingInterval will be assigned setInterval() later
 */
-const snake = new Snake();
+const snake  =  new Snake();
 snake.createFood();
 let movingInterval;
 
@@ -28,10 +28,10 @@ let movingInterval;
 * When arrow key is clicked on keyborad, direction changes
 * Snake cannot move towards opposite direction
 */
-document.onkeydown=function(e){
-    if(Math.abs(snake.lastDirection-e.keyCode)!==2 && snake.isMoving)
+document.onkeydown = function(e){
+    if(Math.abs(snake.lastDirection-e.keyCode) !== 2 && snake.isMoving)
         if(e.keyCode>36 && e.keyCode<41)
-            snake.direction=e.keyCode;
+            snake.direction = e.keyCode;
 }
 
 
@@ -48,8 +48,8 @@ document.onkeydown=function(e){
 */
 function startFunction(){
     if(!snake.isMoving){
-        snake.isMoving=true;
-        movingInterval=setInterval(function(){
+        snake.isMoving = true;
+        movingInterval = setInterval(function(){
             if(snake.checkIfAteFood()){
                 snake.makeBigger();
                 snake.createFood();
@@ -61,7 +61,7 @@ function startFunction(){
                 return;
             }
             snake.move();
-        },100);
+        }, 100);
     }
 }
 
@@ -71,7 +71,7 @@ function startFunction(){
 function stopFunction(){
     snake.reset();
     clearInterval(movingInterval);
-    snake.isMoving=false;
+    snake.isMoving = false;
 }
 
 /*
@@ -79,12 +79,12 @@ function stopFunction(){
 */
 function pauseFunction(){
     clearInterval(movingInterval);
-    snake.isMoving=false;
+    snake.isMoving = false;
 }
 
 
 /*          Adding onclick listeners            */
-startBtn.addEventListener('click',startFunction)
+startBtn.addEventListener('click', startFunction)
 
 pauseBtn.addEventListener('click', pauseFunction);
 

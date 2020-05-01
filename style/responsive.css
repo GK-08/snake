@@ -1,0 +1,19 @@
+@media screen and (max-height: 899px){
+    #board{
+        width: 320px;
+        height: 480px;
+    }
+    #score-container{
+        width: 320px;
+    }
+}
+
+@media screen and (max-height: 699px){
+    #board{
+        width: 240xp;
+        height: 320px;
+    }
+    #score-container{
+        width: 240px;
+    }
+}

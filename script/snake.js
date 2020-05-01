@@ -14,6 +14,7 @@ class Snake {
     *                       constructor()
     * Creates snakeHead, appends to board, calls initialize() function [line 39],
     * creates an array where all the cells will be saved with snakeHead,
+    * declares cell witdh by 10px,
     * creates starting four cells (snakeHead excluded)
     */
     constructor() {
@@ -21,11 +22,12 @@ class Snake {
         this.snakeHead.classList.add(`snake-cell`);
         board.appendChild(this.snakeHead);
         this.initialize();
-
+        this.startingCellsNumber = 5;
+        this.cellWidth=10;
         this.snake = [this.snakeHead];
-        for(let i = 1; i<5; i++){
+        for(let i = 1; i < this.startingCellsNumber; i++){
             const cell = document.createElement(`div`);
-            cell.style.left = `${this.snakeHead.offsetLeft - (10 * i)}px`;
+            cell.style.left = `${this.snakeHead.offsetLeft - (this.cellWidth * i)}px`;
             cell.classList.add(`snake-cell`);
             board.appendChild(cell);
             this.snake.push(cell);
@@ -57,14 +59,14 @@ class Snake {
             BEST_SCORE.innerHTML = `Best: ${this.score}`;
         }
         this.initialize();
-        for(let i = this.snake.length-1; i>0; i--){
-            if(i>4){
+        for(let i = this.snake.length - 1; i > 0; i--){
+            if(i >= this.startingCellsNumber){
                 this.snake[i].parentNode.removeChild(this.snake[i]);
                 this.snake.pop();
             }
             else{
                 this.snake[i].style.top = `0px`;
-                this.snake[i].style.left = `${this.snakeHead.offsetLeft-(10*i)}px`;
+                this.snake[i].style.left = `${this.snakeHead.offsetLeft-(this.cellWidth*i)}px`;
             }
         }
 
@@ -76,22 +78,22 @@ class Snake {
     * Creates and keeps last direction that helps to prevent accepting opposite direction;
     */
     move(){
-        for(let i = this.snake.length-1; i>0; i--){
+        for(let i = this.snake.length - 1; i > 0; i--){
             this.snake[i].style.left = `${this.snake[i-1].offsetLeft}px`;
             this.snake[i].style.top = `${this.snake[i-1].offsetTop}px`;
         }
         switch(this.direction){
             case LEFT:
-                this.snakeHead.style.left = `${this.snakeHead.offsetLeft-10}px`;
+                this.snakeHead.style.left = `${this.snakeHead.offsetLeft-this.cellWidth}px`;
                 break;
             case UP:
-                this.snakeHead.style.top = `${this.snakeHead.offsetTop-10}px`;
+                this.snakeHead.style.top = `${this.snakeHead.offsetTop-this.cellWidth}px`;
                 break;
             case RIGHT:
-                this.snakeHead.style.left = `${this.snakeHead.offsetLeft+10}px`;
+                this.snakeHead.style.left = `${this.snakeHead.offsetLeft+this.cellWidth}px`;
                 break;
             case DOWN:
-                this.snakeHead.style.top = `${this.snakeHead.offsetTop+10}px`;
+                this.snakeHead.style.top = `${this.snakeHead.offsetTop+this.cellWidth}px`;
                 break;
         }
         this.lastDirection = this.direction;
@@ -111,14 +113,14 @@ class Snake {
     /*
     *               createFood()
     * Gets random numbers to define food position;
-    * "Fixes" numbers to be 10 multiple;
+    * "Fixes" numbers to be cell width multiple;
     * Defines food positionl
     */
     createFood(){
         let X = Math.floor(Math.random()*BOARD_WIDTH);
         let Y = Math.floor(Math.random()*BOARD_HEIGHT);
-        X -= (X % 10);
-        Y -= (Y % 10);
+        X -= (X % this.cellWidth);
+        Y -= (Y % this.cellWidth);
         food.style.left = `${X}px`;
         food.style.top = `${Y}px`;
     }
@@ -160,17 +162,17 @@ class Snake {
                 }
                 break;
             case RIGHT:
-                if(X === BOARD_WIDTH-10){
+                if(X === BOARD_WIDTH-this.cellWidth){
                     return true;
                 }
                 break;
             case DOWN:
-                if(Y === BOARD_HEIGHT-10){
+                if(Y === BOARD_HEIGHT-this.cellWidth){
                     return true;
                 }
                 break;
         }
-        for(let i = this.snake.length-1; i>0; i--){
+        for(let i = this.snake.length - 1; i > 0; i--){
             if(this.snakeHead.offsetLeft === this.snake[i].offsetLeft && 
                 this.snakeHead.offsetTop === this.snake[i].offsetTop){
                     return true;

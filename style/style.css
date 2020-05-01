@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    background-color: #ddd;
+}
 #board{
     position: relative;
     margin: auto;
@@ -10,13 +13,13 @@
     width: 480px;
     height: 640px;
     align-self: center;
-    background-color: beige;
-    box-shadow: 0 0 0 8px blue;
+    background-color: rgb(229, 255, 210);
+    box-shadow: 0 0 0 8px rgb(0, 102, 204);
 }
 
 .snake-cell{
     position: absolute;
-    background-color: red;
+    background-color: rgb(51, 26, 0);
     width: 10px;
     height: 10px;
 }
@@ -25,7 +28,7 @@
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: green;
+    background-color: #e3242b;
 }
 
 #score-container{
@@ -49,5 +52,22 @@
     flex-wrap: wrap;
     flex-direction: column;
     position: absolute;
-    right: -49.8px;
+    right: -45px;
+}
+
+.button{
+    font-size: 32px;
+    margin-bottom: 3px;
+}
+
+#start-button{
+    color: #009000;
+}
+
+#pause-button{
+    color: blue;
+}
+
+#stop-button{
+    color: red;
 }

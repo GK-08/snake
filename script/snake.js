@@ -41,6 +41,7 @@ class Snake{
         this.snakeHead.style.left=`40px`;
         this.direction=RIGHT;
         this.score=0;
+        CURRENT_SCORE.innerHTML=`Score: 0`;
         this.isMoving=false;
     }
     /*

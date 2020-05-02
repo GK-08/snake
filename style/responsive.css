@@ -10,3 +10,16 @@
         font-size: 22px;
     }
 }
+
+@media screen and (max-height: 550px){
+    #board{
+        width: 240px;
+        height: 320px;
+    }
+    #score-container{
+        width: 240px;
+    }
+    .score{
+        font-size: 18px;
+    }
+}

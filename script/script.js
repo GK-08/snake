@@ -57,8 +57,8 @@ function startFunction(){
             }
             if(snake.checkIfDied()){
                 clearInterval(movingInterval);
+                window.alert(`Sorry, you lost :(\nYou scored ${snake.score} points!`);
                 snake.reset();
-                window.alert(`Sorry, you lost.\nYou scored ${snake.score}`);
                 return;
             }
             snake.move();

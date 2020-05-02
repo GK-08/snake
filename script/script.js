@@ -90,3 +90,6 @@ startBtn.addEventListener('click', startFunction)
 pauseBtn.addEventListener('click', pauseFunction);
 
 stopBtn.addEventListener('click', stopFunction);
+
+//Board size needs to be updated when screen size changes
+window.addEventListener('resize', ()=>{location.reload()});

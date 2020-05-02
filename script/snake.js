@@ -111,18 +111,39 @@ class Snake {
         return false;
     }
     /*
-    *               createFood()
-    * Gets random numbers to define food position;
+    *           randomPositionGenerator()
+    * It's used only for food cell;
+    * Gets random numbers to define position;
     * "Fixes" numbers to be cell width multiple;
-    * Defines food positionl
+    * @returns an array of numbers (coordinates);
+    */
+    randomPositionGenerator(){
+        let x = Math.floor(Math.random() * BOARD_WIDTH);
+        let y = Math.floor(Math.random() * BOARD_HEIGHT);
+        x -= (x % this.cellWidth);
+        y -= (y % this.cellWidth);
+        return([x, y]);
+    }
+    /*
+    * 
+    * Gets coordinates by calling randomPositionGenerator() [line: 121];
+    * Checks if it matches any of snake cell coordinates
+    * while so, gets new coordinates by by calling randomPositionGenerator() [line: 121];
     */
     createFood(){
-        let X = Math.floor(Math.random()*BOARD_WIDTH);
-        let Y = Math.floor(Math.random()*BOARD_HEIGHT);
-        X -= (X % this.cellWidth);
-        Y -= (Y % this.cellWidth);
-        food.style.left = `${X}px`;
-        food.style.top = `${Y}px`;
+        let matchesSnakeArea;
+        let [x, y] = this.randomPositionGenerator();
+        do {
+            matchesSnakeArea=false;
+            for(let i = 0; i < this.snake.length; i++){
+                if(x === this.snake[i].offsetLeft && y === this.snake[i].offsetTop){
+                    [x, y] = this.randomPositionGenerator();
+                    matchesSnakeArea = true;
+                }
+            }
+        } while(this.matchesSnakeArea);
+        food.style.left = `${x}px`;
+        food.style.top = `${y}px`;
     }
     /*
     *                   updateScore()
